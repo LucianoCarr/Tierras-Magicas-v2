@@ -1,0 +1,9 @@
+@import './general.css';
+@import './header.css';
+@import './index.css';
+@import './card.css';
+@import './admin.css';
+@import './add.css';
+@import './edit.css';
+@import './footer.css';
+@import './mediaQuery.css'

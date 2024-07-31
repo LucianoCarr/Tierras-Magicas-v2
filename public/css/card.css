@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-body {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 25%;
+    padding: 14px;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    text-align: center;
+    background-image: url(../img/papel_de_pergamino-transformed.jpeg);
+    background-position-y: center;
+}
+
+.card h2 {
+    font-family: 'merienda'
+}
+
+.card hr {
+    width: 80%;
+    align-self: center;
+    border: black solid 1px;
+    margin: 4px;
+}
+
+.img-realm {
+    background-color: white;
+    mix-blend-mode: color-burn;
+}
+
+.img-per-realm {
+    height: 274px;
+    object-fit: contain;
+    mix-blend-mode: darken;
+}
+
+.img-card {
+    height: 274px;
+    object-fit: contain;
+    mix-blend-mode: darken;
+}
+
+.card h6 {
+    font-family: 'merienda';
+    font-size: 20px;
+}
+
+.card p {
+    font-family: 'merienda';
+    font-size: 16px;
+}
+
+.see-more {
+    color: blue;
+    text-align: center;
+    font-family: cursive;
+    border: 0;
+   background-image: url(https://i.pinimg.com/736x/03/f3/d7/03f3d79cb6edd982345dee0efc43d315.jpg);
+   background-position-y: center;
+}

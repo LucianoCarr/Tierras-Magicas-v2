@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('partials/head',{
+        title : 'Tierras Magicas',
+      }) %>
+      
+<body>
+
+    <%- include('partials/header') %>
+    
+<main>
+    <h1 class="title">Creacion de Personaje</h1>
+    <div class="add-view">
+        <form class="add-form" action="/character/add" method="POST" enctype="multipart/form-data">
+            <div>
+                <!-- nombre -->
+            <div>
+                <label for="name">Nombre:</label>
+                <input class="nameCharacterAdd" type="text" id="name" name="name" placeholder="Nombre">
+            </div>
+            <!-- reino -->
+            <div>
+                <label for="realm">Reino:</label>
+                <input type="text" id="realm" name="realm" placeholder="Reino">
+            </div>
+            <!-- poder -->
+            <div>
+                <label for="power">Poder:</label>
+                <input type="text" id="power" name="power" placeholder="Poder">
+            </div>
+            <!-- elemento -->
+             <div>
+                 <label for="element">Elemento:</label>
+                 <select name="element" id="element">
+                    <option class="agua" value="Agua">Agua</option>
+                    <option class="tierra" value="Tierra">Tierra</option>
+                    <option class="fuego" value="Fuego">Fuego</option>
+                    <option class="aire" value="Aire">Aire</option>
+                </select>
+            </div>
+            <!-- descripcion -->
+            <div>
+                <label for="description">Descripcion:</label>
+                <br>
+                <textarea maxlength="150" name="description" id="description" cols="60" rows="5" placeholder="Descripcion del personaje"></textarea>
+            </div>
+            <!-- imagen -->
+            <div>
+                <label for="formFile">Imagen:</label>
+                <input type="file" id="formFile" name="image">
+            </div>
+            <div>
+                <label for="image">URL de la imagen:</label>
+                <input type="text" id="image" name="image">
+            </div>
+            <h3>Asegurate de que tu imagen sea ".jpg" ".png" o ".gif"</h3>
+            <div>
+                <button type="submit">Crear Personaje</button>
+            </div>
+        </div>
+    </form>
+</div>
+</main>
+
+</body>
+</html>

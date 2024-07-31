@@ -1,0 +1,18 @@
+.title {
+    color: white;
+    text-decoration: underline;
+}
+
+.title a {
+    color: white;
+}
+
+.card h3 {
+    font-family: "merienda";
+    font-style: italic;
+    font-size: 22px;
+}
+
+.card a img {
+    width: 100%;
+}

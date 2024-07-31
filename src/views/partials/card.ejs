@@ -1,0 +1,19 @@
+<div class="container">
+    <% characters.forEach(character => { %>
+    <div class="card-body">
+        <div class="card">
+            <h2><%= character.name %></h2>
+            <% if (character.image.startsWith('http')) { %>
+                <img class="img-card" src="<%= character.image %>" alt="<%= character.name %>">
+            <% } else { %>
+                <img class="img-card" src="/img/<%= character.image || 'tierras-magicas.jpg' %>" alt="<%= character.name %>">
+            <% } %>
+            <h6>Reino <%= character.realm %></h6>
+            <p>Puntos: <%= character.power %></p>
+            <p>Elemento: <%= character.element %></p>
+            <button class="see-more">Descripción ↓</button>
+            <p class="card-text"><%= character.description %></p>
+        </div>
+    </div>
+    <% }) %>
+</div>

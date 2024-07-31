@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('partials/head',{
+        title : 'Tierras Magicas',
+      }) %>
+      
+<body>
+
+    <%- include('partials/header') %>
+
+<main>
+    <h1 class="title">Editar Reino</h1>
+<div class="edit-view">
+      <div class="card-body">
+        <h1 class="title"><a href="/admin">Volver</a></h1>
+        <div class="card d-flex justify-content-evenly">
+          <h2>Reino <%= realm.name %></h2>
+          <% if (realm.image.startsWith('http')) { %>
+          <img class="img-edit" src="<%= realm.image %>" alt="<%= realm.name %>"/>
+          <% } else { %>
+          <img class="img-edit" src="/img/<%= realm.image || 'tierras-magicas.jpg' %>" alt="<%= realm.name %>"/>
+          <% } %>
+        </div>
+      </div>
+   
+      <form class="edit-form" action="/realm/edit/<%= realm.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div>
+            <!-- nombre -->
+            <div style="padding: 10px 0;">
+                <label for="name">Reino:</label>
+                <input type="text" id="name" name="name" value="<%= realm.name %>">
+            </div>
+            <!-- imagen -->
+            <div style="padding: 10px 0;">
+                <label for="formFile"></label>
+                <input type="file" id="formFile" name="image">
+            </div>
+            <div style="padding: 10px 0;">
+                <% if (realm.image.startsWith('http')) { %>
+                    <img src="<%= realm.image %>" alt="<%= realm.name %>" style="max-width: 100px; mix-blend-mode: darken;">
+                    <% } else { %>
+                        <img src="/img/<%= realm.image %>" alt="<%= realm.name %>" style="max-width: 100px; mix-blend-mode: darken;">
+                        <% } %>
+            </div>
+            <div style="padding: 10px 0;">
+                <label for="image">URL de la imagen:</label>
+                <input type="text" id="image" name="image">
+            </div>
+            <div style="padding: 10px 0;">
+                <label for="defaultImage">Usar imagen por defecto:</label>
+                <input type="checkbox" id="defaultImage" name="defaultImage">
+            </div>
+            <div style="padding: 10px 0;">
+                <button type="submit">Editar Reino</button>
+            </div>
+    </form>
+</div>
+
+</main>
+</body>
+</html>

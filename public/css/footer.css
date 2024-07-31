@@ -1,0 +1,14 @@
+footer {
+    background-image: url(https://i.pinimg.com/736x/03/f3/d7/03f3d79cb6edd982345dee0efc43d315.jpg);
+    background-position-y: center;
+    background-size: cover;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 4rem;
+}
+
+footer img {
+    width: 4%;
+    border-radius: 50%;
+}

@@ -1,0 +1,106 @@
+.edit-view {
+    display: flex;
+    justify-content: center;
+}
+
+.edit-form {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background-image: url(../img/papel_de_pergamino-transformed.jpeg);
+    background-position-y: center;
+}
+
+.edit-form label {
+    font-weight: bold;
+    font-family: "merienda";
+}
+
+.edit-form div {
+    padding: 6px 0;
+}
+
+.edit-form div input,select,textarea {
+    background: center;
+    text-align: center;
+}
+
+.edit-form div input:focus,textarea:focus, select:focus {
+    background-color: white;
+}
+
+.edit-form textarea {
+    align-content: center;
+    width: 90%;
+}
+
+.img-edit {
+    height: 274px;
+    object-fit: contain;
+    mix-blend-mode: darken;
+}
+
+.nameCharacter {
+    width: 30%;
+}
+
+#power {
+    width: 10%;
+}
+
+.edit-form div button {
+    margin-top: 8px;
+}
+
+.edit-form button {
+	background-image: linear-gradient(to right, aqua 30%, blue 100%);
+	border-radius: 40px;
+  box-sizing: border-box;
+	color: black;
+	display: block;
+	font: 12px 'merienda';
+	height: 40px;
+	letter-spacing: 1px;
+	margin: 0 auto;
+	padding: 4px;
+	position: relative;
+  text-decoration: none;
+	text-transform: uppercase;
+	width: 160px;
+	z-index: 2;
+}
+
+.edit-form button:hover {
+	color: #fff;
+}
+
+.edit-form button span {
+	align-items: center;
+	background: #e7e8e9;
+	border-radius: 40px;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	transition: background .5s ease;
+	width: 100%;
+}
+
+.edit-form button:hover span {
+	background: transparent;
+}
+
+.agua {
+    background-color: dodgerblue;
+}
+
+.tierra {
+    background-color: mediumseagreen;
+}
+
+.fuego {
+    background-color: crimson;
+}
+
+.aire {
+    background-color: plum;
+}

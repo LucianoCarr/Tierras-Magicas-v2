@@ -1,0 +1,107 @@
+/* tablet */
+@media(max-width: 770px) {
+    footer h2 {
+        font-size: 18px;
+    }
+
+    .card h6 {
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 768px) {
+    header {
+        padding-bottom: 1px;
+    }
+
+    nav {
+        text-align: center;
+        display: block;
+    }
+
+    .card-body {
+        max-width: 33%;
+    }
+}
+
+@media(max-width: 525px) {
+    .dashboard {
+        width: 98%;
+    }
+
+    .edit-view .card-body {
+        display: none;
+    }
+
+    .card-body {
+        max-width: 50%;
+    }
+
+    .sky img {
+        width: 5%;
+    }
+
+    footer img {
+        width: 7%;
+    }
+
+    footer h2 {
+        font-size: 13px;
+    }
+}
+
+@media(max-width: 421px) {
+    .add-form {
+        width: 95%;
+    }
+    .edit-form {
+        width: 95%;
+    }
+    
+    .container {
+        justify-content: center;
+    }
+
+    .card-body {
+        max-width: 75%;
+    }
+
+    .sky img {
+        width: 8%;
+    }
+
+    footer h2 {
+        font-size: 10px;
+    }
+}
+
+@media(max-width: 355px) {
+    .add-view {
+        width: 80%;
+    }
+
+    .add-form {
+        width: fit-content;
+    }
+
+    .edit-view {
+        width: 80%;
+    }
+    
+    .edit-form {
+        width: fit-content;
+    }
+
+    .dashboard {
+        width: 90%;
+    }
+
+    .accordion-header {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    footer h2 {
+        font-size: 8px;
+    }
+}

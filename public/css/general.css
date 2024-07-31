@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Diplomata+SC&family=Mate+SC&family=Merienda:wght@300..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-family: 'merienda';
+    text-align: center;
+}
+
+h3 {
+    font-family: "merienda";
+}
+
+main {
+    background-image: url(https://img.freepik.com/premium-vector/dark-blue-black-vintage-background-royal-with-classic-baroque-pattern-rococo-with-darkened-edges_619989-1320.jpg);
+    padding-top: 1rem;
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 1rem;
+    min-height: 100vh
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+:root {
+    --tipografia:  "Mate SC", serif;
+    --tipografia2:  "Diplomata SC", "serif"
+}

@@ -1,0 +1,31 @@
+header {
+    background-image: url(https://i.pinimg.com/736x/03/f3/d7/03f3d79cb6edd982345dee0efc43d315.jpg);
+    background-position-y: center;
+    background-repeat: round;
+    padding-bottom: 1.5rem;
+}
+
+header div {
+    display: flex;
+    
+}
+
+nav {
+    font-family: 'merienda';
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 14px;
+}
+
+header img {
+    width: 5%;
+}
+
+.sky img {
+    width: 3%;
+    position: fixed;
+    right: 1%; /* 12px */
+    bottom: 12%;
+    mix-blend-mode: exclusion;
+}

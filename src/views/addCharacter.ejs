@@ -22,7 +22,14 @@
             <!-- reino -->
             <div>
                 <label for="realm">Reino:</label>
-                <input type="text" id="realm" name="realm" placeholder="Reino">
+                <!-- <input type="text" id="realm" name="realm" placeholder="Reino"> -->
+                <select aria-label="Default select example" name="realm" id="realm">
+                    <option disabled selected>Seleccionar...</option>
+                    <% realms.forEach(({ name, id }) => { %>
+                        <option value="<%= id %>"><%= name %></option>
+                    <% }) %>
+                </select>
+                
             </div>
             <!-- poder -->
             <div>
@@ -32,11 +39,11 @@
             <!-- elemento -->
              <div>
                  <label for="element">Elemento:</label>
-                 <select name="element" id="element">
-                    <option class="agua" value="Agua">Agua</option>
-                    <option class="tierra" value="Tierra">Tierra</option>
-                    <option class="fuego" value="Fuego">Fuego</option>
-                    <option class="aire" value="Aire">Aire</option>
+                <select aria-label="Default select example" name="element" id="element">
+                    <option disabled selected>Seleccionar...</option>
+                    <% elements.forEach(({ name, id }) => { %>
+                        <option value="<%= id %>"><%= name %></option>
+                    <% }) %>
                 </select>
             </div>
             <!-- descripcion -->

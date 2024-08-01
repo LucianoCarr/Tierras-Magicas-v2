@@ -12,10 +12,10 @@ const realmDB = realms.map(realm => ({
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Realms', realmDB, {});
+    await queryInterface.bulkInsert('Realms', realmDB, {});
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Realms', null, {});
+    await queryInterface.bulkDelete('Realms', null, {});
   }
 };

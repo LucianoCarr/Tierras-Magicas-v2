@@ -38,7 +38,11 @@
             <!-- reino -->
             <div>
                 <label for="realm">Reino:</label>
-                <input type="text" id="realm" name="realm" value="<%= character.realm %>">
+                <select class="form-select" aria-label="Default select example" name="category" id="category">
+                    <% categories.forEach(({name,id}) => { %>
+                        <option value="<%= id %>" <%= p.categoryId == id && 'selected' %>><%= name %></option>
+                    <% }) %>
+                </select>
             </div>
             <!-- poder -->
             <div>

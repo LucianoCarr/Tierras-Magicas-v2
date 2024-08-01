@@ -1,16 +1,14 @@
-const fs = require('fs')
-const path = require('path')
-
-const filePath = path.join(__dirname, '../../data/characters.json')
+const allCharacters = require('../../services/characterServices/all.Services');
 
 module.exports = async (req, res) => {
     try {
-        const characters = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        const characters = await allCharacters();
 
         return res.render('allCharacter', {
             characters
         });
     } catch (error) {
-      console.log(error);
+        console.log("Error al obtener los personajes:", error);
+        res.status(500).send('Internal Server Error');
     }
 };

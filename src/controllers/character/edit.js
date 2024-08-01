@@ -1,41 +1,31 @@
-const fs = require('fs');
-const path = require('path');
-
-const filePath = path.join(__dirname, '../../data/characters.json');
+const editCharacter = require('../../services/characterServices/edit.Services');
 
 module.exports = async (req, res) => {
     try {
-        const characters = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-        const { name, image, realm, element, power, description } = req.body;
+        const { name, image, realmId, elementId, power, description } = req.body;
+        const { id } = req.params;
 
-        const editCharacter = characters.map(character => {
-            
-            if (character.id === +req.params.id) {
-                character.name = name.trim();
-                character.image = req.file ? req.file.filename : character.image
-                character.realm = realm.trim();
-                character.power = +power;
-                character.element = element;
-                character.description = description.trim() || "No hay descipcion disponible";
+        const data = {
+            name,
+            image: req.file ? req.file.filename : image,
+            realmId,
+            elementId,
+            power,
+            description
+        };
 
-                if (character.image) {
-                    character.image = character.image;
-                }
-                
-                if (req.file) {
-                    character.image = req.file.filename;
-                } else if (image && (image.startsWith('http://') || image.startsWith('https://'))) {
-                    character.image = image;
-                }
-            }
-            return character;
-        });
+        const updatedCharacter = await editCharacter(id, data);
 
-        fs.writeFileSync(filePath, JSON.stringify(editCharacter, null, 2), 'utf-8');
+        if (!updatedCharacter) {
+            return res.status(404).json({
+                ok: false,
+                message: 'Character not found'
+            });
+        }
 
         return res.redirect('/admin');
     } catch (error) {
-        console.log("Error al editar el producto:", error);
+        console.log("Error al editar el personaje:", error);
         res.status(500).send('Internal Server Error');
     }
 };

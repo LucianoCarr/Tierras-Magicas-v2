@@ -1,9 +1,4 @@
-const fs = require('fs')
-const path = require('path')
-//const upload = require('../../middleWares/upload')
-
-const filePath = path.join(__dirname, '../../data/characters.json')
-const characters = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+const createCharacter = require('../../services/characterServices/create.Services')
 
 //const {validationResult} = require('express-validator')
 
@@ -13,18 +8,18 @@ module.exports = async (req, res) => {
 
        // if (errors.isEmpty()) {
 
-        const {name, image, realm, element, power, description} = req.body
+        const { name, image, realm, element, power, description } = req.body;
+        const { file } = req;
 
-        let newCharacter = {
-            id: characters[characters.length - 1].id + 1,
+        // Formatear los datos para pasarlos al servicio
+        const newCharacter = {
             name: name?.trim(),
-            //image: '',
-            realm: realm?.trim(),
+            image: image,
+            realmId: realm,
+            elementId: element,
             power: +power,
-            element,
-            description: description?.trim() || "No hay descipcion disponible"
-        }
-        console.log(newCharacter);
+            description: description?.trim() || "No hay descripcion disponible"
+        };
 
             if (image && (image.startsWith('http://') || image.startsWith('https://'))) {
                 newCharacter.image = image; // Utiliza la URL proporcionada
@@ -34,9 +29,8 @@ module.exports = async (req, res) => {
                 newCharacter.image = "tierras-magicas.jpg"; // Imagen por defecto si no se proporciona ninguna
             }
 
-        characters.push(newCharacter)
+        await createCharacter(newCharacter)
         
-        fs.writeFileSync(filePath, JSON.stringify(characters, null, 2), 'utf-8')
 
         return res.redirect('/')
 

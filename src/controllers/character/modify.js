@@ -1,18 +1,25 @@
-const fs = require('fs')
-const path = require('path')
-
-const filePath = path.join(__dirname, '../../data/characters.json')
+// src/controllers/character/editCharacterView.controller.js
+const characterId = require('../../services/characterServices/modify.Services');
 
 module.exports = async (req, res) => {
     try {
-        const characters = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-        
-        const character = characters.find(character => character.id === +req.params.id)
+        const { id } = req.params;
+
+        const character = await characterId(id);
+
+        if (!character) {
+            return res.status(404).json({
+                ok: false,
+                message: 'Personaje no encontrado'
+            });
+        }
 
         return res.render('editCharacter', {
             character
         });
+
     } catch (error) {
-      console.log(error);
+        console.log("Error al obtener el personaje para editar", error);
+        res.status(500).send('Internal Server Error');
     }
 };

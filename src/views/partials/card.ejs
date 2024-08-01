@@ -8,9 +8,9 @@
             <% } else { %>
                 <img class="img-card" src="/img/<%= character.image || 'tierras-magicas.jpg' %>" alt="<%= character.name %>">
             <% } %>
-            <h6>Reino <%= character.realm %></h6>
+            <h6>Reino <%= character.realms ? character.realms.name : 'Desconocido' %></h6>
             <p>Puntos: <%= character.power %></p>
-            <p>Elemento: <%= character.element %></p>
+            <p>Elemento: <%= character.elements ? character.elements.name : 'Desconocido' %></p>
             <button class="see-more">Descripción ↓</button>
             <p class="card-text"><%= character.description %></p>
         </div>

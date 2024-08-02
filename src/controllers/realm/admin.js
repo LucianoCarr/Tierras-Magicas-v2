@@ -1,4 +1,22 @@
-const fs = require('fs')
+const db = require('../../database/models')
+const characterPerRealm = require('../../services/realmServices/admin.Services');
+
+module.exports = async (req, res) => {
+    try {
+        const realms = await characterPerRealm();
+
+        return res.render('admin', {
+            realms
+        });
+
+    } catch (error) {
+        console.log("Error al obtener los personajes:", error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
+/* const fs = require('fs')
 const path = require('path')
 
 const charactersFilePath = path.join(__dirname, '../../data/characters.json')
@@ -16,4 +34,4 @@ module.exports = async (req, res) => {
     } catch (error) {
       console.log(error);
     }
-};
+}; */

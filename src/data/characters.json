@@ -1026,33 +1026,6 @@
     "description": "No hay descipcion disponible"
   },
   {
-    "id": 115,
-    "name": "Slash",
-    "realm": "Nigromante",
-    "power": 23,
-    "element": "Aire",
-    "description": "No hay descipcion disponible",
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5V_eroUaZ1SW-Hp2HfBSQB8zgeyPS0MQoeaZEbP7QQ2_Wqg9zZz42vLey3Qo-9lpoO8M&usqp=CAU"
-  },
-  {
-    "id": 116,
-    "name": "Aaron",
-    "realm": "Nigromante",
-    "power": 23,
-    "element": "Tierra",
-    "description": "nada",
-    "image": "https://i.pinimg.com/736x/cd/5c/87/cd5c87a536ccada1adc1ee5395006e03.jpg"
-  },
-  {
-    "id": 117,
-    "name": "Agumon",
-    "realm": "Digimon",
-    "power": 20,
-    "element": "Fuego",
-    "description": "Es un digimon amarillo que parece dinosaurio",
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw9dCNgh38BO_H71v5TOTLqvyT3_BRI4Y1IA&s"
-  },
-  {
     "id": 120,
     "name": "Agumon",
     "realm": "Digimon",

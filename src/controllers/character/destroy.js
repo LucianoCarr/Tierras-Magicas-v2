@@ -1,18 +1,13 @@
-const fs = require('fs')
-const path = require('path')
-
-const filePath = path.join(__dirname, '../../data/characters.json')
-const characters = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+const deleteCharacter = require('../../services/characterServices/destroy.Services')
 
 module.exports = async (req, res) => {
     try {
-        const deleteCharacter = characters.filter(character => character.id !== +req.params.id)
-
-        fs.writeFileSync(filePath, JSON.stringify(deleteCharacter, null, 2), 'utf-8')
-
-        return res.redirect('/admin');
-
-    } catch (error) {
-        console.log(error);
-    }
+            await deleteCharacter(req.params.id);
+            
+            res.redirect('/admin')
+            
+        } catch (error) {
+            console.error('Error eliminando el personaje en el controlador:', error.message);
+            res.status(500).send('Internal Server Error');
+        }
 }

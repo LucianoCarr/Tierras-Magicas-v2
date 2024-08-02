@@ -1,30 +1,27 @@
 const db = require('../../database/models');
 
-const realmCharacter = async () => {
+module.exports = async () => {
     try {
-        const realms = await db.Realm.findAll({ attributes: ['id', 'name'] });
+        const characters = await db.Character.findAll({
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
+            include: [
+                {
+                    association: 'realms',
+                    attributes: ['id', 'name']
+                },
+                {
+                    association: 'elements',
+                    attributes: ['id', 'name']
+                }
+            ]
+        });
 
-        return realms;
-
+        return characters;
     } catch (error) {
-        console.error('Error al obtener los reinos:', error.message);
-        throw new Error('Error al obtener los reinos');
+        console.error('Error en el service:', error.message);
+        throw new Error('Error en el service');
     }
 };
 
-const elementCharacter = async () => {
-    try {
-        const elements = await db.Element.findAll({ attributes: ['id', 'name'] });
-
-        return elements;
-
-    } catch (error) {
-        console.error('Error al obtener los elementos:', error.message);
-        throw new Error('Error al obtener los elementos');
-    }
-};
-
-module.exports = {
-    realmCharacter,
-    elementCharacter
-};

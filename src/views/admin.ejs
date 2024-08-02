@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('partials/head', { title: 'Tierras Magicas' }) %>
+    <%- include('partials/head',{
+        title : 'Tierras Magicas',
+      }) %>
+      
 
 <body>
 
@@ -10,126 +13,127 @@
     <h1>Tablero de administrador</h1>
 
     <!-- Tablero Administrador Reinos -->
-    <div class="dashboard">
-        <div class="accordion" id="realmsAccordion">
-            <% realms.forEach(realm => { %>
-                <div class="accordion-item">
-                    <h2 class="accordion-header d-flex align-items-center" id="heading<%= realm.id %>">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= realm.id %>" aria-expanded="true" aria-controls="collapse<%= realm.id %>">
-                            <%= realm.id %> - Reino <%= realm.name %>
-                        </button>
-                        <div class="admin-icons">
-                            <a class="btn btn-success" href="/realm/edit/<%= realm.id %>"><i class="fa-solid fa-pen"></i></a>
-                            <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalRealmDelete<%= realm.id %>"><i class="fa-solid fa-trash-can-arrow-up"></i></a>
-                            <a type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalRealmInfo<%= realm.id %>"><i class="fa-solid fa-eye"></i></a>
-                        </div>
-                    </h2>
-                    <div id="collapse<%= realm.id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= realm.id %>" data-bs-parent="#realmsAccordion">
-                        <div class="accordion-body">
-                            <h3>Personajes del Reino <%= realm.name %></h3>
-                            <% if (realm.characters.length > 0) { %>
-                                <% realm.characters.forEach(character => { %>
-                                    <div class="list">
-                                        <p><%= character.id %> - <%= character.name %></p>
-                                        <div class="admin-icons">
-                                            <a class="btn btn-success btn-sm" href="/character/edit/<%= character.id %>"><i class="fa-solid fa-pen"></i></a>
-                                            <a type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete<%= character.id %>"><i class="fa-solid fa-trash-can-arrow-up"></i></a>
-                                            <a type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalInfo<%= character.id %>"><i class="fa-solid fa-eye"></i></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Modal Eliminar Personaje -->
-                                    <div class="modal fade" id="modalDelete<%= character.id %>" tabindex="-1" aria-labelledby="modalDeleteLabel<%= character.id %>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalDeleteLabel<%= character.id %>">Confirmar Eliminación</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ¿Estás seguro de que deseas eliminar al personaje <strong><%= character.name %></strong>?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <form action="/character/delete/<%= character.id %>?_method=DELETE" method="POST">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Modal Detalle Personaje -->
-                                    <div class="modal fade" id="modalInfo<%= character.id %>" tabindex="-1" aria-labelledby="modalInfoLabel<%= character.id %>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content w-50">
-                                                <div class="card">
-                                                    <button type="button" class="btn-close align-self-end" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    <h2><%= character.name %></h2>
-                                                    <% if (character.image && character.image.startsWith('http')) { %>
-                                                        <img class="img-admin" src="<%= character.image %>" alt="<%= character.name %>">
-                                                    <% } else { %>
-                                                        <img class="img-admin" src="/img/<%= character.image || 'tierras-magicas.jpg' %>" alt="<%= character.name %>">
-                                                    <% } %>
-                                                    <h6>Reino <%= character.realm %></h6>
-                                                    <p>Puntos: <%= character.power %></p>
-                                                    <p>Elemento: <%= character.element %></p>
-                                                    <p class="card-text">Descripción: <%= character.description %></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <% }) %>
-                            <% } else { %>
-                                <p>No hay personajes para este reino.</p>
-                            <% } %>
-                        </div>
-                    </div>
-
-                    <!-- Modal Eliminar Reino -->
-                    <div class="modal fade" id="modalRealmDelete<%= realm.id %>" tabindex="-1" aria-labelledby="modalRealmDeleteLabel<%= realm.id %>" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalRealmDeleteLabel<%= realm.id %>">Confirmar Eliminación</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Estás seguro de que deseas eliminar el <strong>Reino <%= realm.name %></strong>?
-                                </div>
-                                <div class="modal-footer">
-                                    <form action="/realm/delete/<%= realm.id %>?_method=DELETE" method="POST">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Detalle Reino -->
-                    <div class="modal fade" id="modalRealmInfo<%= realm.id %>" tabindex="-1" aria-labelledby="modalRealmInfoLabel<%= realm.id %>" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="card">
-                                    <button type="button" class="btn-close align-self-end" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    <h2>Reino <%= realm.name %></h2>
-                                    <% if (realm.image && realm.image.startsWith('http')) { %>
-                                        <img class="img-admin" src="<%= realm.image %>" alt="<%= realm.name %>">
-                                    <% } else { %>
-                                        <img class="img-admin" src="/img/<%= realm.image || 'tierras-magicas.jpg' %>" alt="<%= realm.name %>">
-                                    <% } %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+<div class="dashboard">
+    <div class="accordion" id="realmsAccordion">
+      <% realms.forEach(realm => { %>
+        <div class="accordion-item">
+          <h2 class="accordion-header d-flex align-items-center" id="heading<%= realm.id %>">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= realm.id %>" aria-expanded="true" aria-controls="collapse<%= realm.id %>">
+                <%= realm.id %> - Reino <%= realm.name %>
+            </button>
+            <div class="admin-icons">
+                <a  class="btn btn-success" href="/realm/edit/<%= realm.id %>"><i class="fa-solid fa-pen"></i></a>
+                <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalRealmDelete<%= realm.id %>"><i class="fa-solid fa-trash-can-arrow-up"></i></a>
+                <a type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalRealmInfo<%= realm.id %>"><i class="fa-solid fa-eye"></i></a>
+            </div>
+          </h2>
+          
+          <!-- Personajes por Reino -->
+        <div id="collapse<%= realm.id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= realm.id %>" data-bs-parent="#realmsAccordion">
+            <div class="accordion-body">
+              <h3>Personajes del Reino <%= realm.name %></h3>
+              <% characters.filter(character => character.realm === realm.name).forEach(character => { %>
+                <div class="list">
+                  <p><%= character.id %> - <%= character.name %></p>
+                  <div class="admin-icons">
+                    <a class="btn btn-success btn-sm" href="/character/edit/<%= character.id %>"><i class="fa-solid fa-pen"></i></a>
+                    <a type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete<%= character.id %>"><i class="fa-solid fa-trash-can-arrow-up"></i></a>
+                    <a type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalInfo<%= character.id %>"><i class="fa-solid fa-eye"></i></a>
+                  </div>
                 </div>
-            <% }) %>
-        </div>
-    </div>
+    
+                    <!-- Modal Eliminar Personaje -->
+                    <div class="modal fade" id="modalDelete<%= character.id %>" tabindex="-1" aria-labelledby="modalDeleteLabel<%= character.id %>" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalDeleteLabel<%= character.id %>">Confirmar Eliminación</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            ¿Estás seguro de que deseas eliminar al personaje <strong><%= character.name %></strong>?
+                          </div>
+                          <div class="modal-footer">
+                            <form action="/character/delete/<%= character.id %>?_method=DELETE" method="POST">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+    
+                    <!-- Modal Detalle Personaje -->
+                    <div class="modal fade" id="modalInfo<%= character.id %>" tabindex="-1" aria-labelledby="modalInfoLabel<%= character.id %>" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content w-50">
+                          <div class="card">
+                            <button type="button" class="btn-close align-self-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h2><%= character.name %></h2>
+                            <% if (character.image.startsWith('http')) { %>
+                              <img class="img-admin" src="<%= character.image %>" alt="<%= character.name %>">
+                            <% } else { %>
+                              <img class="img-admin" src="/img/<%= character.image || 'tierras-magicas.jpg' %>" alt="<%= character.name %>">
+                            <% } %>
+                            <h6>Reino <%= character.realm %></h6>
+                            <p>Puntos: <%= character.power %></p>
+                            <p>Elemento: <%= character.element %></p>
+                            <p class="card-text">Descripción: <%= character.description %></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-    <script src="/js/admin.js"></script>
+                  <% }) %>
+                  
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Eliminar Reino -->
+        <div class="modal fade" id="modalRealmDelete<%= realm.id %>" tabindex="-1" aria-labelledby="modalRealmDeleteLabel<%= realm.id %>" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalRealmDeleteLabel<%= realm.id %>">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar el <strong>Reino <%= realm.name %></strong>?
+              </div>
+              <div class="modal-footer">
+                <form action="/realm/delete/<%= realm.id %>?_method=DELETE" method="POST">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modal Detalle Reino -->
+        <div class="modal fade" id="modalRealmInfo<%= realm.id %>" tabindex="-1" aria-labelledby="modalRealmInfoLabel<%= realm.id %>" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="card">
+                <button type="button" class="btn-close align-self-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h2>Reino <%= realm.name %></h2>
+                <% if (realm.image.startsWith('http')) { %>
+                  <img class="img-admin" src="<%= realm.image %>" alt="<%= realm.name %>">
+                <% } else { %>
+                  <img class="img-admin" src="/img/<%= realm.image || 'tierras-magicas.jpg' %>" alt="<%= realm.name %>">
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <% }) %>
+    </div>
+</div>
+
+  <script src="/js/admin.js"></script>
+ 
 
 </body>
 </html>

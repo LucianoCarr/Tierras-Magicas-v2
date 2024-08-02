@@ -1,12 +1,23 @@
+const db = require('../../database/models')
 const allCharacters = require('../../services/characterServices/all.Services');
 
 module.exports = async (req, res) => {
     try {
         const characters = await allCharacters();
 
-        return res.render('allCharacter', {
-            characters
+        const realms = await db.Realm.findAll({
+            attributes: ['id', 'name']
         });
+        const elements = await db.Element.findAll({
+            attributes: ['id', 'name']
+        });
+
+        return res.render('allCharacter', {
+            characters,
+            realms,
+            elements
+        });
+
     } catch (error) {
         console.log("Error al obtener los personajes:", error);
         res.status(500).send('Internal Server Error');

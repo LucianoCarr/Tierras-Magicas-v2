@@ -1,21 +1,30 @@
-// src/controllers/character/editCharacterView.controller.js
-const characterId = require('../../services/characterServices/modify.Services');
+const db = require('../../database/models')
+const editCharacter = require('../../services/characterServices/modify.Services');
 
 module.exports = async (req, res) => {
     try {
-        const { id } = req.params;
+        const character = await editCharacter(req.params.id);
 
-        const character = await characterId(id);
+        const realms = await db.Realm.findAll({
+            attributes: ['id', 'name']
+        });
 
-        if (!character) {
-            return res.status(404).json({
-                ok: false,
-                message: 'Personaje no encontrado'
-            });
-        }
+        const elements = await db.Element.findAll({
+            attributes: ['id', 'name']
+        });
+
+        const elementClasses = {
+            Agua: 'agua',
+            Tierra: 'tierra',
+            Fuego: 'fuego',
+            Aire: 'aire'
+        };
 
         return res.render('editCharacter', {
-            character
+            character,
+            realms,
+            elements,
+            elementClasses
         });
 
     } catch (error) {

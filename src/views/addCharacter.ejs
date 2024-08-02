@@ -42,7 +42,7 @@
                 <select aria-label="Default select example" name="element" id="element">
                     <option disabled selected>Seleccionar...</option>
                     <% elements.forEach(({ name, id }) => { %>
-                        <option value="<%= id %>"><%= name %></option>
+                        <option class="<%= elementClasses[name] %>" value="<%= id %>"><%= name %></option>
                     <% }) %>
                 </select>
             </div>

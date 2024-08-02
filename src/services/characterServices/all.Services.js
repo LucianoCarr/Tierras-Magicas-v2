@@ -8,14 +8,12 @@ module.exports = async () => {
             },
             include: [
                 {
-                    model: db.Realm,
-                    as: 'realms', 
-                    attributes: ['name']
+                    association: 'realms',
+                    attributes: ['id', 'name']
                 },
                 {
-                    model: db.Element,
-                    as: 'elements',
-                    attributes: ['name']
+                    association: 'elements',
+                    attributes: ['id', 'name']
                 }
             ]
         });

@@ -9,7 +9,6 @@ module.exports = async (req, res) => {
        // if (errors.isEmpty()) {
 
         const { name, image, realm, element, power, description } = req.body;
-        const { file } = req;
 
         // Formatear los datos para pasarlos al servicio
         const newCharacter = {

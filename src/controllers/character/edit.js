@@ -2,30 +2,39 @@ const editCharacter = require('../../services/characterServices/edit.Services');
 
 module.exports = async (req, res) => {
     try {
-        const { name, image, realmId, elementId, power, description } = req.body;
+        const { name, realmId, elementId, power, description } = req.body;
         const { id } = req.params;
 
-        const data = {
+        let image;
+
+        if (image && !(image.startsWith('http://') || image.startsWith('https://'))) {
+            // Si no es una URL válida, entonces es un nombre de archivo
+            image = image;
+        }
+
+        // Si se carga un archivo, usa el nombre del archivo
+        if (req.file) {
+            image = req.file.filename;
+        } else {
+            // Si no se carga un archivo, usa el valor existente de imagen
+            image = req.body.image || "tierras-magicas.jpg";
+        }
+
+        const updateCharacter = {
             name,
-            image: req.file ? req.file.filename : image,
+            image,
             realmId,
             elementId,
             power,
             description
         };
 
-        const updatedCharacter = await editCharacter(id, data);
-
-        if (!updatedCharacter) {
-            return res.status(404).json({
-                ok: false,
-                message: 'Character not found'
-            });
-        }
+        await editCharacter(id, updateCharacter);
 
         return res.redirect('/admin');
+        
     } catch (error) {
-        console.log("Error al editar el personaje:", error);
+        console.error("Error al editar el personaje:", error.message);
         res.status(500).send('Internal Server Error');
     }
 };

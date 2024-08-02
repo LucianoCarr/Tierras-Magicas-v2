@@ -8,6 +8,7 @@ module.exports = {
     host: process.env.DB_HOST_DEV,
     port: process.env.DB_PORT_DEV,
     dialect: "mysql",
+    logging: false // Desactiva el logging en el entorno de desarrollo
   },
   test: {
     username: "root",

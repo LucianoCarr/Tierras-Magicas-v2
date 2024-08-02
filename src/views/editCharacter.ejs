@@ -21,9 +21,9 @@
           <% } else { %>
           <img class="img-edit" src="/img/<%= character.image || 'tierras-magicas.jpg' %>" alt="<%= character.name %>"/>
           <% } %>
-          <h6>Reino <%= character.realm %></h6>
-          <p>Puntos: <%= character.power %></p>
-          <p>Elemento: <%= character.element %></p>
+          <h6>Reino <%= character.realms ? character.realms.name : 'Desconocido' %></h6>
+            <p>Puntos: <%= character.power %></p>
+            <p>Elemento: <%= character.elements ? character.elements.name : 'Desconocido' %></p>
           <p class="card-text">Descripción: <%= character.description %></p>
         </div>
       </div>
@@ -38,9 +38,10 @@
             <!-- reino -->
             <div>
                 <label for="realm">Reino:</label>
-                <select class="form-select" aria-label="Default select example" name="category" id="category">
-                    <% categories.forEach(({name,id}) => { %>
-                        <option value="<%= id %>" <%= p.categoryId == id && 'selected' %>><%= name %></option>
+                <select aria-label="Default select example" name="realmId" id="realm">
+                    <option disabled selected>Seleccionar...</option>
+                    <% realms.forEach(({ name, id }) => { %>
+                        <option value="<%= id %>" <%= character.realmId === id ? 'selected' : '' %>><%= name %></option>
                     <% }) %>
                 </select>
             </div>
@@ -52,12 +53,11 @@
             <!-- elemento -->
              <div>
                 <label for="element">Elemento:</label>
-                <select name="element" id="element">
-                    <option value="<%= character.element %>" hidden> <%= character.element %> </option>
-                    <option class="agua" value="Agua">Agua</option>
-                    <option class="tierra" value="Tierra">Tierra</option>
-                    <option class="fuego" value="Fuego">Fuego</option>
-                    <option class="aire" value="Aire">Aire</option>
+                <select aria-label="Default select example" name="elementId" id="element">
+                    <option disabled selected>Seleccionar...</option>
+                    <% elements.forEach(({ name, id }) => { %>
+                        <option class="<%= elementClasses[name] %>" value="<%= id %>" <%= character.elementId === id ? 'selected' : '' %>><%= name %></option>
+                    <% }) %>
                 </select>
             </div>
             <!-- descripcion -->
@@ -80,7 +80,7 @@
                     </div>
                     <div>
                         <label for="image">URL de la imagen:</label>
-                        <input type="text" id="image" name="image">
+                        <input type="text" id="image" name="image" value="<%= character.image %>">
                     </div>
                     <div>
                         <label for="defaultImage">Usar imagen por defecto:</label>

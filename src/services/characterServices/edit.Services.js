@@ -11,9 +11,9 @@ module.exports = async (id, data) => {
         });
 
         if (!existingCharacter) {
-            return null;
+            throw new Error("Personaje no existe");
         }
-        
+
         await existingCharacter.update({
             name: name?.trim() || existingCharacter.name,
             image: image || existingCharacter.image,

@@ -11,17 +11,24 @@
 
 @media(max-width: 768px) {
     header {
-        padding-bottom: 1px;
+        padding-bottom: 8px;
     }
 
     nav {
-        text-align: center;
-        display: block;
+        justify-content: space-between;
     }
 
     .card-body {
         max-width: 33%;
     }
+}
+
+@media(max-width: 700px) {
+    nav {
+        text-align: center;
+        display: block;
+    }
+
 }
 
 @media(max-width: 525px) {

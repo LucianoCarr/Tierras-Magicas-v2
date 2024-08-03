@@ -11,22 +11,22 @@
 
 <main>
     <h1 class="title">Editar Personaje</h1>
-    <div class="edit-view">
-        <div class="card-body">
-            <h1 class="title"><a href="/admin">Volver</a></h1>
-            <div class="card d-flex justify-content-evenly">
-          <h2><%= character.name %></h2>
-          <% if (character.image.startsWith('http')) { %>
-          <img class="img-edit" src="<%= character.image %>" alt="<%= character.name %>"/>
-          <% } else { %>
-          <img class="img-edit" src="/img/<%= character.image || 'tierras-magicas.jpg' %>" alt="<%= character.name %>"/>
-          <% } %>
-          <h6>Reino <%= character.realms ? character.realms.name : 'Desconocido' %></h6>
-            <p>Puntos: <%= character.power %></p>
-            <p>Elemento: <%= character.elements ? character.elements.name : 'Desconocido' %></p>
-          <p class="card-text">Descripción: <%= character.description %></p>
-        </div>
-      </div>
+<div class="edit-view">
+    <div class="card-body">
+        <h1 class="title"><a href="/admin">Volver</a></h1>
+        <div class="card d-flex justify-content-evenly">
+        <h2><%= character.name %></h2>
+        <% if (character.image.startsWith('http')) { %>
+        <img class="img-edit" src="<%= character.image %>" alt="<%= character.name %>"/>
+        <% } else { %>
+        <img class="img-edit" src="/img/<%= character.image || 'tierras-magicas.jpg' %>" alt="<%= character.name %>"/>
+        <% } %>
+        <h6>Reino <%= character.realms ? character.realms.name : 'Desconocido' %></h6>
+        <p>Puntos: <%= character.power %></p>
+        <p>Elemento: <%= character.elements ? character.elements.name : 'Desconocido' %></p>
+        <p class="card-text">Descripción: <%= character.description %></p>
+    </div>
+</div>
    
       <form class="edit-form" action="/character/edit/<%= character.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
        <div>

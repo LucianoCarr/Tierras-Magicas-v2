@@ -8,16 +8,16 @@ module.exports = async (req, res) => {
         let image;
 
         if (image && !(image.startsWith('http://') || image.startsWith('https://'))) {
-            // Si no es una URL válida, entonces es un nombre de archivo
-            image = image;
-        }
+            image = image;   // Si no es una URL válida, entonces es un nombre de archivo
 
-        // Si se carga un archivo, usa el nombre del archivo
-        if (req.file) {
-            image = req.file.filename;
+        }else if (req.file) {
+            image = req.file.filename;   // Si se carga un archivo, usa el nombre del archivo
+
+        }else if (req.body.defaultImage) {
+            image = "tierras-magicas.jpg";  //Si se marca la casilla imagen por defecto
+
         } else {
-            // Si no se carga un archivo, usa el valor existente de imagen
-            image = req.body.image || "tierras-magicas.jpg";
+            image = req.body.image;   // Si no se carga un archivo, usa el valor existente de imagen
         }
 
         const updateCharacter = {

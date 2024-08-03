@@ -1,9 +1,4 @@
-const fs = require('fs')
-const path = require('path')
-//const upload = require('../../middleWares/upload')
-
-const filePath = path.join(__dirname, '../../data/realms.json')
-const realms = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+const createRealm = require('../../services/realmServices/create.Services')
 
 //const {validationResult} = require('express-validator')
 
@@ -15,25 +10,22 @@ module.exports = async (req, res) => {
 
         const {name, image} = req.body
 
-        let newRealm = {
-            id: realms[realms.length - 1].id + 1,
+        const newRealm = {
             name: name?.trim(),
-            //image: '',
-           }
-        console.log(newRealm);
+            image: image
+        };
 
             if (image && (image.startsWith('http://') || image.startsWith('https://'))) {
-                newRealm.image = image; // Utiliza la URL proporcionada
+                newRealm.image = image; 
             } else if (req.file) {
-                newRealm.image = req.file.filename; // Utiliza la imagen cargada localmente
+                newRealm.image = req.file.filename; 
             } else {
-                newRealm.image = "tierras-magicas.jpg"; // Imagen por defecto si no se proporciona ninguna
+                newRealm.image = "tierras-magicas.jpg"; 
             }
 
-        realms.push(newRealm)
+        await createRealm(newRealm)
         
-        fs.writeFileSync(filePath, JSON.stringify(realms, null, 2), 'utf-8')
-
+        
         return res.redirect('/')
 
   /* } else {
@@ -44,6 +36,7 @@ module.exports = async (req, res) => {
    } */
 
     } catch (error) {
-        console.log("Error al crear el producto:",error);
+        console.log("Error al crear los reinos:", error);
+        res.status(500).send('Internal Server Error');
     }
 }

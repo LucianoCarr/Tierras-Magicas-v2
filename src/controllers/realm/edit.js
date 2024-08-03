@@ -1,38 +1,36 @@
-const fs = require('fs');
-const path = require('path');
-
-const filePath = path.join(__dirname, '../../data/realms.json');
+const editRealm = require('../../services/realmServices/edit.Services')
 
 module.exports = async (req, res) => {
     try {
-        const realms = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        const { name } = req.body;
+        const { id } = req.params;
 
-        const { name, image } = req.body;
+        let image;
 
-        const editRealm = realms.map(realm => {
+        if (image && !(image.startsWith('http://') || image.startsWith('https://'))) {
+            image = image;
 
-            if (realm.id === +req.params.id) {
-                realm.name = name.trim();
-                realm.image = req.file ? req.file.filename : realm.image;
+        }else if (req.file) {
+            image = req.file.filename;
 
-                if (realm.image) {
-                    realm.image = realm.image;
-                }
+        }else if (req.body.defaultImage) {
+            image = "tierras-magicas.jpg";
 
-                if (req.file) {
-                    realm.image = req.file.filename;
-                } else if (image && (image.startsWith('http://') || image.startsWith('https://'))) {
-                    realm.image = image;
-                }
-            }
-            return realm;
-        });
+        } else {
+            image = req.body.image;
+        }
 
-        fs.writeFileSync(filePath, JSON.stringify(editRealm, null, 2), 'utf-8');
+        const updateRealm = {
+            name,
+            image
+        };
+
+        await editRealm(id, updateRealm);
 
         return res.redirect('/admin');
 
     } catch (error) {
-        console.log("Error al editar el reino:", error);
+        console.error("Error al editar el reino:", error.message);
+        res.status(500).send('Internal Server Error');
     }
 };

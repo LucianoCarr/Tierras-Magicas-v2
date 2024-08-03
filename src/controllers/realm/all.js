@@ -1,16 +1,15 @@
-const fs = require('fs')
-const path = require('path')
-
-const filePath = path.join(__dirname, '../../data/realms.json')
+const allRealms = require('../../services/realmServices/all.Services')
 
 module.exports = async (req, res) => {
     try {
-        const realms = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        const realms = await allRealms()
 
         return res.render('index', {
             realms
         });
+        
     } catch (error) {
-      console.log(error);
+        console.log("Error al obtener los reinos:", error);
+        res.status(500).send('Internal Server Error');
     }
 };

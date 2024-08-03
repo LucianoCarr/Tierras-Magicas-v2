@@ -1,18 +1,12 @@
-const fs = require('fs')
-const path = require('path')
-
-const filePath = path.join(__dirname, '../../data/realms.json')
-const realms = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-
+const deleteRealm = require('../../services/realmServices/destroy.Services')
 module.exports = async (req, res) => {
     try {
-        const deleteRealm = realms.filter(realm => realm.id !== +req.params.id)
-
-        fs.writeFileSync(filePath, JSON.stringify(deleteRealm, null, 2), 'utf-8')
-
-        return res.redirect('/admin');
+        await deleteRealm(req.params.id);
+            
+        res.redirect('/admin')
 
     } catch (error) {
-        console.log(error);
+        console.error('Error eliminando el reino en el controlador:', error.message);
+        res.status(500).send('Internal Server Error');
     }
 }

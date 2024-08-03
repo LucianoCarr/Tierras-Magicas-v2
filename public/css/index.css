@@ -16,3 +16,8 @@
 .card a img {
     width: 100%;
 }
+
+.result {
+    color: white;
+    margin: 3rem auto;
+}

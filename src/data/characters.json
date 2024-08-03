@@ -1024,23 +1024,5 @@
     "image": "1722352399430_image_.png",
     "power": 20,
     "description": "No hay descipcion disponible"
-  },
-  {
-    "id": 120,
-    "name": "Agumon",
-    "realm": "Digimon",
-    "power": 30,
-    "element": "Agua",
-    "description": "fdfdfd",
-    "image": "https://cdn.dribbble.com/users/2005975/screenshots/4271122/1.gif"
-  },
-  {
-    "id": 121,
-    "name": "Nigromante",
-    "realm": "Digimon",
-    "power": 10,
-    "element": "Aire",
-    "description": "nada",
-    "image": "https://ts2.mm.bing.net/th?q=tribal%20angel"
   }
 ]

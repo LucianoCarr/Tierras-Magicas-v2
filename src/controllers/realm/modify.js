@@ -1,18 +1,14 @@
-const fs = require('fs')
-const path = require('path')
-
-const filePath = path.join(__dirname, '../../data/realms.json')
+const editRealm = require('../../services/realmServices/modify.Services')
 
 module.exports = async (req, res) => {
     try {
-        const realms = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-        
-        const realm = realms.find(realm => realm.id === +req.params.id)
+        const realm = await editRealm(req.params.id)
 
         return res.render('editRealm', {
             realm
         });
     } catch (error) {
-      console.log(error);
+        console.log("Error al obtener el reino para editar", error);
+        res.status(500).send('Internal Server Error');
     }
 };

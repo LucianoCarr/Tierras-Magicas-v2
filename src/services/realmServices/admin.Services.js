@@ -2,7 +2,7 @@ const db = require('../../database/models');
 
 module.exports = async () => {
     try {
-        const Realms = await db.Realm.findAll({
+        const realms = await db.Realm.findAll({
             attributes: {
                 exclude: ['createdAt', 'updatedAt']
             },
@@ -13,7 +13,7 @@ module.exports = async () => {
                     /* order: [['id', 'ASC']], */
                     include: [
                         {
-                            association: 'elements', // Asegúrate de que la asociación se llame 'element' en tu modelo
+                            association: 'elements', 
                             attributes: ['name']
                         }
                     ]
@@ -21,7 +21,7 @@ module.exports = async () => {
             ]
         });
 
-        return Realms;
+        return realms;
 
     } catch (error) {
         console.error('Error en el service:', error.message);

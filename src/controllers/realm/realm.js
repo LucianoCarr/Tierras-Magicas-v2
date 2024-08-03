@@ -1,23 +1,15 @@
-const fs = require('fs')
-const path = require('path')
-
-const filePathRealms = path.join(__dirname, '../../data/realms.json')
-const filePathCharacters = path.join(__dirname, '../../data/characters.json')
+const characterPerRealm = require('../../services/realmServices/realm.Services')
 
 module.exports = async (req, res) => {
         try {
-            const characters = JSON.parse(fs.readFileSync(filePathCharacters, 'utf-8'));
-            const realms = JSON.parse(fs.readFileSync(filePathRealms, 'utf-8'));
-    
-            const realm = realms.find(realm => realm.id === +req.params.id);
-    
-            const charactersInRealm = characters.filter(character => character.realm === realm.name);
-    
+            const charactersInRealm = await characterPerRealm(req.params.id)
+            
             return res.render('realmCharacter', {
-                realm,
                 charactersInRealm
             });
+            
         } catch (error) {
-            console.log(error);
+            console.log("Error al obtener los personajes por reino:", error);
+            res.status(500).send('Internal Server Error');
         }
     }

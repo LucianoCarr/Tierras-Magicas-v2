@@ -1,7 +1,14 @@
+const db = require('../../database/models')
 const editCharacter = require('../../services/characterServices/edit.Services');
+const { validationResult } = require('express-validator');
 
 module.exports = async (req, res) => {
     try {
+        const errors = validationResult(req)
+
+        if (errors.isEmpty()) {
+            
+
         const { name, realmId, elementId, power, description } = req.body;
         const { id } = req.params;
 
@@ -32,6 +39,41 @@ module.exports = async (req, res) => {
         await editCharacter(id, updateCharacter);
 
         return res.redirect('/admin');
+
+    } else {
+          // Obtener el personaje a editar
+          const character = await db.Character.findByPk(req.params.id, {
+            include: [
+                {
+                    association: 'realms',
+                    attributes: ['id', 'name']
+                },
+                {
+                    association: 'elements',
+                    attributes: ['id', 'name']
+                }
+            ]
+          });
+
+        const realms = await db.Realm.findAll()
+        const elements = await db.Element.findAll()
+    
+        const elementClasses = {
+            Agua: 'agua',
+            Tierra: 'tierra',
+            Fuego: 'fuego',
+            Aire: 'aire'
+        };
+    
+            return res.render('editCharacter', {
+                    errors:errors.mapped(),
+                    old: req.body,
+                    realms,
+                    elements,
+                    elementClasses,
+                    character
+                });
+       }
         
     } catch (error) {
         console.error("Error al editar el personaje:", error.message);

@@ -29,7 +29,8 @@
             <!-- nombre -->
             <div style="padding: 10px 0;">
                 <label for="name">Reino:</label>
-                <input type="text" id="name" name="name" value="<%= realm.name %>">
+                <input class="<%= locals.errors && (errors.name && 'is-invalid') %>" type="text" id="name" name="name" value="<%= realm.name %>">
+                <span class="error-character" id="msgError-name"><%= locals.errors && (errors.name && errors.name.msg) %></span>
             </div>
             <!-- imagen -->
             <div style="padding: 10px 0;">
@@ -45,7 +46,7 @@
             </div>
             <div style="padding: 10px 0;">
                 <label for="image">URL de la imagen:</label>
-                <input type="text" id="image" name="image" value="<%= realm.image %>">
+                <input id="image" name="image" value="<%= realm.image %>">
             </div>
             <div style="padding: 10px 0;">
                 <label for="defaultImage">Usar imagen por defecto:</label>

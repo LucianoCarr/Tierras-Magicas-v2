@@ -1,12 +1,11 @@
 const createRealm = require('../../services/realmServices/create.Services')
-
-//const {validationResult} = require('express-validator')
+const {validationResult} = require('express-validator')
 
 module.exports = async (req, res) => {
     try {
-        //const errors = validationResult(req)
+        const errors = validationResult(req)
 
-       // if (errors.isEmpty()) {
+        if (errors.isEmpty()) {
 
         const {name, image} = req.body
 
@@ -28,12 +27,12 @@ module.exports = async (req, res) => {
         
         return res.redirect('/')
 
-  /* } else {
-        return res.redirect('addCharacter', {
+  } else {
+        return res.render('addRealm', {
             errors:errors.mapped(),
             old: req.body
         });
-   } */
+   }
 
     } catch (error) {
         console.log("Error al crear los reinos:", error);

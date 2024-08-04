@@ -10,7 +10,7 @@ module.exports = [
         ignore:' ',
         }).withMessage('Solo letras'),
 
-    check('realm')
+    check('realmId')
     .notEmpty().withMessage('Elige un Reino'),
     
     check('power')
@@ -22,7 +22,7 @@ module.exports = [
         max:2,
     }).withMessage('Maximo dos digitos'),
 
-    check('element')
+    check('elementId')
     .notEmpty().withMessage('Elige un elemento'),
     
 ]

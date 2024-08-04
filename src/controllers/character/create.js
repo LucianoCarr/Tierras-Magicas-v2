@@ -1,16 +1,15 @@
+const db = require('../../database/models')
 const createCharacter = require('../../services/characterServices/create.Services')
-
-//const {validationResult} = require('express-validator')
+const { validationResult } = require('express-validator')
 
 module.exports = async (req, res) => {
     try {
-        //const errors = validationResult(req)
+        const errors = validationResult(req)
 
-       // if (errors.isEmpty()) {
-
+        if (errors.isEmpty()) {
+        
         const { name, image, realm, element, power, description } = req.body;
 
-        // Formatear los datos para pasarlos al servicio
         const newCharacter = {
             name: name?.trim(),
             image: image,
@@ -33,12 +32,25 @@ module.exports = async (req, res) => {
 
         return res.redirect('/')
 
-  /* } else {
-        return res.redirect('addCharacter', {
-            errors:errors.mapped(),
-            old: req.body
-        });
-   } */
+  } else {
+    const realms = await db.Realm.findAll()
+    const elements = await db.Element.findAll()
+
+    const elementClasses = {
+        Agua: 'agua',
+        Tierra: 'tierra',
+        Fuego: 'fuego',
+        Aire: 'aire'
+    };
+
+        return res.render('addCharacter', {
+                errors:errors.mapped(),
+                old: req.body,
+                realms,
+                elements,
+                elementClasses
+            });
+   }
 
     } catch (error) {
         console.log("Error al crear el producto:",error);

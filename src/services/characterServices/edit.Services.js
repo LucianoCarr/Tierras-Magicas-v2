@@ -20,7 +20,7 @@ module.exports = async (id, data) => {
             realmId: realmId || existingCharacter.realmId,
             elementId: elementId || existingCharacter.elementId,
             power: power !== undefined ? +power : existingCharacter.power,
-            description: description?.trim() || existingCharacter.description,
+            description: description?.trim() || "Descripción no disponible",
         });
 
         return existingCharacter;

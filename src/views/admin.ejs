@@ -77,7 +77,7 @@
                             <% } %>
                             <h6>Reino <%= realm.name %></h6>
                             <p>Puntos: <%= character.power %></p>
-                            <p>Elemento: <%= character.elements.name %></p>
+                            <p>Elemento: <%= character.elements ? character.elements.name : 'No disponible' %></p>
                             <p class="card-text">Descripción: <%= character.description %></p>
                           </div>
                         </div>

@@ -42,6 +42,13 @@
     width: 10%;
 }
 
+.error-character {
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-weight: 500;
+}
+
 .add-form div button {
     margin-top: 8px;
 }

@@ -1,7 +1,13 @@
+const db = require('../../database/models')
 const editRealm = require('../../services/realmServices/edit.Services')
+const { validationResult } = require('express-validator');
 
 module.exports = async (req, res) => {
     try {
+        const errors = validationResult(req)
+
+        if (errors.isEmpty()) {
+
         const { name } = req.body;
         const { id } = req.params;
 
@@ -28,6 +34,16 @@ module.exports = async (req, res) => {
         await editRealm(id, updateRealm);
 
         return res.redirect('/admin');
+
+    } else {
+        const realm = await db.Realm.findByPk(req.params.id);
+
+        return res.render('editRealm', {
+                errors:errors.mapped(),
+                old: req.body,
+                realm
+            });
+    }
 
     } catch (error) {
         console.error("Error al editar el reino:", error.message);

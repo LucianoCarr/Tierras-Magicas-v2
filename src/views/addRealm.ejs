@@ -17,7 +17,8 @@
                 <!-- nombre -->
             <div style="padding: 10px 0;">
                 <label for="name">Reino:</label>
-                <input type="text" id="name" name="name" placeholder="Nombre">
+                <input class="<%= locals.errors && (errors.name && 'is-invalid') %>" type="text" value="<%= locals.old && (old.name && old.name) %>" id="name" name="name" placeholder="Nombre">
+                <span class="error-character" id="msgError-name"><%= locals.errors && (errors.name && errors.name.msg) %></span>    
             </div>
             <!-- imagen -->
             <div style="padding: 10px 0;">

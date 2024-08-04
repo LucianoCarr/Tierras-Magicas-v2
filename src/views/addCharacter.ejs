@@ -17,34 +17,36 @@
                 <!-- nombre -->
             <div>
                 <label for="name">Nombre:</label>
-                <input class="nameCharacterAdd" type="text" id="name" name="name" placeholder="Nombre">
+                <input class="nameCharacterAdd <%= locals.errors && (errors.name && 'is-invalid') %>" type="text" value="<%= locals.old && (old.name && old.name) %>" id="name" name="name" placeholder="Nombre">
+                <span class="error-character" id="msgError-name"><%= locals.errors && (errors.name && errors.name.msg) %></span>
             </div>
             <!-- reino -->
             <div>
                 <label for="realm">Reino:</label>
-                <!-- <input type="text" id="realm" name="realm" placeholder="Reino"> -->
-                <select aria-label="Default select example" name="realm" id="realm">
+                <select aria-label="Default select example <%= locals.errors && (errors.realm && 'is-invalid') %>" name="realm" value="<%= locals.old && (old.realm && old.realm) %>" id="realm">
                     <option disabled selected>Seleccionar...</option>
                     <% realms.forEach(({ name, id }) => { %>
                         <option value="<%= id %>"><%= name %></option>
                     <% }) %>
                 </select>
-                
+                <span class="error-character" id="msgError-realm"><%= locals.errors && (errors.realm && errors.realm.msg) %></span>
             </div>
             <!-- poder -->
             <div>
                 <label for="power">Poder:</label>
-                <input type="text" id="power" name="power" placeholder="Poder">
+                <input class="<%= locals.errors && (errors.power && 'is-invalid') %>" type="text" value="<%= locals.old && (old.power && old.power) %>" id="power" name="power" placeholder="Poder">
+                <span class="error-character" id="msgError-power"><%= locals.errors && (errors.power && errors.power.msg) %></span>
             </div>
             <!-- elemento -->
              <div>
                  <label for="element">Elemento:</label>
-                <select aria-label="Default select example" name="element" id="element">
+                 <select aria-label="Default select example <%= locals.errors && (errors.element && 'is-invalid') %>" name="element" value="<%= locals.old && (old.element && old.element) %>" id="element">
                     <option disabled selected>Seleccionar...</option>
                     <% elements.forEach(({ name, id }) => { %>
-                        <option class="<%= elementClasses[name] %>" value="<%= id %>"><%= name %></option>
+                        <option class="<%= elementClasses[name] %>" value="<%= id %>" ><%= name %></option>
                     <% }) %>
                 </select>
+                <span class="error-character" id="msgError-element"><%= locals.errors && (errors.element && errors.element.msg) %></span>
             </div>
             <!-- descripcion -->
             <div>
